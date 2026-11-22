@@ -73,3 +73,28 @@ Also fixed: dark error color measured 4.46:1 on the raised panel, now #EBAE98 (4
 |---|---|---|---|
 | I13 | At 2x font and in landscape the search and filters never collapsed, leaving room for about one row | Toolbar moved out of the collapsing header so the filters can scroll away; title stays pinned | At 2x, scrolling hides the filters and shows five rows |
 | I14 | First launch showed an empty search bar and filter chips with nothing to filter | Search, filters and Pick for me hide until there is at least one pick | First run shows only the empty message and + |
+
+## M5 review (2026-11-23)
+
+**Security review** (by hand; the `security-review` skill needs a remote branch and could not start):
+
+| Area | Finding | Action |
+|---|---|---|
+| SQL injection | Every query uses `?` arguments; search text has `%`, `_` and `\` escaped before LIKE | None needed. Repository test `searchTreatsWildcardsAsText` covers it |
+| Exported components | Only the launcher and the Share alias are exported. The alias ignores `rec_id`, so other apps cannot open the edit form for a pick | Fixed in M3 review; checked again |
+| Shared text | Text shared from other apps had no size cap | Capped at 501 characters, so a too-long link still shows "Keep the link to 500 characters or less." |
+| Links | Links show as selectable text, not tappable, so a shared link cannot launch anything by itself | Kept on purpose |
+| Network | The app has no INTERNET permission, so data cannot leave the phone through the app | Kept on purpose |
+| Debug build | A debug APK lets anyone with USB access read the database with `run-as` | Ship a release APK (not debuggable) in M6 |
+| Backups | Android's default backup is on, so picks move to a new phone through Google backup (encrypted with the screen lock) | Kept on; a personal list is worth keeping |
+| Logging | No log calls anywhere | None needed |
+
+**Accessibility audit** (uiautomator dump of List, People, Add with suggestions, Discard panel, picked Detail, Delete panel; checks 48dp and labels on every tappable element):
+
+- Touch targets: all at least 48dp.
+- Missing label: search icon. Fixed ("Search").
+- Pop-out dim layer has no label on purpose: it is hidden from TalkBack, which uses Cancel or Back.
+
+**Code check:** clean build has no Kotlin warnings; lint has 0 errors and 10 notes (minimum-SDK attributes, Gradle version, merge tag, overdraw on row ripples, one plural false positive).
+
+**Known limits kept on purpose:** names match case-insensitively for A-Z only (SQLite NOCASE), so "Ángel" and "ángel" are two people; database work runs on the main thread, which is fine for a personal list of a few thousand picks.

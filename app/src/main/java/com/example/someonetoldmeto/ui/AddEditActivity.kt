@@ -85,7 +85,7 @@ class AddEditActivity : AppCompatActivity() {
             b.link.setText(rec.link)
             types.entries.first { it.value == rec.type }.key.isChecked = true
         } else {
-            if (fromShare) b.link.setText(intent.getStringExtra(Intent.EXTRA_TEXT)?.trim())
+            if (fromShare) b.link.setText(intent.getStringExtra(Intent.EXTRA_TEXT)?.trim()?.take(Rules.TEXT_MAX + 1))
             b.title.requestFocus()
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         }
