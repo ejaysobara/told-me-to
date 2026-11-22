@@ -48,14 +48,16 @@
             <Button
                 android:id="@+id/cancel"
                 style="@style/Widget.Told.Button.Secondary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
 
             <Button
                 android:id="@+id/confirm"
                 style="@style/Widget.Told.Button.Secondary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:textColor="@color/error" />
         </LinearLayout>

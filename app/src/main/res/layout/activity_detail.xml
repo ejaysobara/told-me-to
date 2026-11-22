@@ -79,18 +79,18 @@
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal">
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/liked"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="@string/status_liked" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/disliked"
                         style="@style/Widget.Told.Button.Secondary"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
                         android:text="@string/status_disliked" />

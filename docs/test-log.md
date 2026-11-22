@@ -53,3 +53,15 @@ Found in code review and fixed (not seen on screen): AddEdit accepted `rec_id` f
 | I05 | EB Garamond's short x-height made 14sp meta and 12sp labels look thin | Body 17sp, meta 15sp, labels 13sp | Meta lines readable at a glance |
 
 Also fixed: dark error color measured 4.46:1 on the raised panel, now #EBAE98 (4.9:1).
+
+## Improvements from the all-states design pass (light, dark, 2x font, landscape; 2026-11-23)
+
+| ID | Evidence | Change | Result |
+|---|---|---|---|
+| I06 | Light success panel was Ivory on Ivory with a faint shadow, read as floating text | Light raised panels get a 1dp Sand edge | Panel reads as a card in light screenshots |
+| I07 | Floating field labels and error text were 12sp Garamond, hard to read | Field label and error text 15sp | "Add a title." and labels readable at 1x |
+| I08 | After rating, both buttons looked the same; only the status line changed | Chosen rating button shows a check icon | "✓ Liked it" visible on Detail |
+| I09 | Name suggestion chip looked like a type chip | Suggestions are filled Sand chips without an outline | Suggestion and type chips look different |
+| I10 | Long titles and links were cut off in single-line fields | Title and link wrap up to 3 lines | Full title visible while editing |
+| I11 | In landscape the keyboard covered the whole screen | flagNoExtractUi on all fields | Form stays visible above the keyboard |
+| I12 | At 2x font, "Discard" split as "Discar d" and rating buttons had uneven heights | Pop-out buttons share the row; paired buttons match height | Clean wrapping at 2x in both panels and Detail |

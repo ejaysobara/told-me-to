@@ -52,6 +52,10 @@ class AddEditActivity : AppCompatActivity() {
             layout.editText?.doAfterTextChanged { layout.error = null }
         }
         b.person.doAfterTextChanged { showSuggestions(it.toString()) }
+        listOf(b.title, b.link).forEach {
+            it.setHorizontallyScrolling(false)
+            it.maxLines = 3
+        }
 
         onBackPressedDispatcher.addCallback(this) {
             if (snapshot() == initial) finish()
@@ -100,6 +104,8 @@ class AddEditActivity : AppCompatActivity() {
             b.suggestions.addView(Chip(this).apply {
                 text = n
                 isCheckable = false
+                chipBackgroundColor = getColorStateList(R.color.quiet)
+                chipStrokeWidth = 0f
                 contentDescription = getString(R.string.use_name, n)
                 setOnClickListener {
                     b.person.setText(n)

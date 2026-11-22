@@ -60,6 +60,8 @@ class DetailActivity : AppCompatActivity() {
         b.title.text = rec.title
         b.meta.text = getString(R.string.detail_meta, getString(rec.type.label()), rec.person, added)
         b.status.setText(rec.status.label())
+        b.liked.setIconResource(if (rec.status == RecStatus.LIKED) R.drawable.ic_check else 0)
+        b.disliked.setIconResource(if (rec.status == RecStatus.DISLIKED) R.drawable.ic_check else 0)
         b.note.isVisible = rec.note != null
         b.note.text = rec.note?.let { getString(R.string.note_quoted, it) }
         b.link.isVisible = rec.link != null
