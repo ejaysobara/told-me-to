@@ -41,8 +41,8 @@ class AddEditActivity : AppCompatActivity() {
         setContentView(b.root)
         b.root.padForSystemBars()
 
-        editId = intent.getLongExtra(Extras.REC_ID, -1).takeIf { it > 0 }
-        fromShare = intent.action == Intent.ACTION_SEND
+        fromShare = intent.component?.className == "$packageName.ui.ShareActivity"
+        editId = if (fromShare) null else intent.getLongExtra(Extras.REC_ID, -1).takeIf { it > 0 }
         b.toolbar.setTitle(if (editId == null) R.string.new_pick else R.string.edit_pick)
         b.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         b.save.setOnClickListener { save() }
@@ -59,12 +59,16 @@ class AddEditActivity : AppCompatActivity() {
         }
         popOut = PopOut(this, b.content, b.popout)
 
-        if (savedInstanceState == null) fill() else initial = savedInstanceState.getString(KEY_INITIAL).orEmpty()
+        if (savedInstanceState == null) fill() else {
+            initial = savedInstanceState.getString(KEY_INITIAL).orEmpty()
+            if (savedInstanceState.getBoolean(KEY_SAVED)) finish()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(KEY_INITIAL, initial)
+        outState.putBoolean(KEY_SAVED, saved)
     }
 
     private fun fill() {
@@ -157,5 +161,6 @@ class AddEditActivity : AppCompatActivity() {
 
     private companion object {
         const val KEY_INITIAL = "initial"
+        const val KEY_SAVED = "saved"
     }
 }

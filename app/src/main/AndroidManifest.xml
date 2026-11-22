@@ -17,15 +17,18 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.AddEditActivity"
-            android:exported="true">
+        <activity android:name=".ui.AddEditActivity" />
+
+        <activity-alias
+            android:name=".ui.ShareActivity"
+            android:exported="true"
+            android:targetActivity=".ui.AddEditActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity android:name=".ui.DetailActivity" />
     </application>

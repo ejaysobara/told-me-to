@@ -78,6 +78,7 @@
     </style>
     <style name="Widget.Told.Button.Text" parent="Widget.Material3.Button.TextButton">
         <item name="android:minHeight">48dp</item>
+        <item name="strokeWidth">0dp</item>
         <item name="android:textAppearance">@style/TextAppearance.Told.Button</item>
         <item name="android:textColor">@color/text</item>
     </style>
