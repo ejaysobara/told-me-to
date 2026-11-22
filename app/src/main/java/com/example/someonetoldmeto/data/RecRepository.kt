@@ -3,6 +3,7 @@ package com.example.someonetoldmeto.data
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import androidx.core.database.sqlite.transaction
 import com.example.someonetoldmeto.model.PersonScore
 import com.example.someonetoldmeto.model.RecStatus
 import com.example.someonetoldmeto.model.RecType
@@ -11,27 +12,20 @@ import com.example.someonetoldmeto.model.Rules
 
 class RecRepository(private val db: SQLiteDatabase) {
 
-    fun save(id: Long?, title: String, person: String, type: RecType, note: String?, link: String?): Long {
-        db.beginTransaction()
-        try {
-            val values = ContentValues().apply {
-                put("person_id", personIdFor(person))
-                put("title", title)
-                put("type", type.db)
-                put("note", note)
-                put("link", link)
-            }
-            val recId = if (id == null) {
-                values.put("created_at", System.currentTimeMillis())
-                db.insertOrThrow("recommendation", null, values)
-            } else {
-                db.update("recommendation", values, "rec_id = ?", arrayOf(id.toString()))
-                id
-            }
-            db.setTransactionSuccessful()
-            return recId
-        } finally {
-            db.endTransaction()
+    fun save(id: Long?, title: String, person: String, type: RecType, note: String?, link: String?): Long = db.transaction {
+        val values = ContentValues().apply {
+            put("person_id", personIdFor(person))
+            put("title", title)
+            put("type", type.db)
+            put("note", note)
+            put("link", link)
+        }
+        if (id == null) {
+            values.put("created_at", System.currentTimeMillis())
+            insertOrThrow("recommendation", null, values)
+        } else {
+            update("recommendation", values, "rec_id = ?", arrayOf(id.toString()))
+            id
         }
     }
 
