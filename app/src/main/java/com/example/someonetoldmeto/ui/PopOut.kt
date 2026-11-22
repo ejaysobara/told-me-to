@@ -5,7 +5,9 @@ import android.view.animation.OvershootInterpolator
 import androidx.activity.ComponentActivity
 import androidx.activity.addCallback
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import com.example.someonetoldmeto.databinding.ViewPopoutBinding
 
 class PopOut(activity: ComponentActivity, private val content: View, private val b: ViewPopoutBinding) {
@@ -14,6 +16,11 @@ class PopOut(activity: ComponentActivity, private val content: View, private val
     private val back = activity.onBackPressedDispatcher.addCallback(activity, false) { hide() }
 
     init {
+        val padBottom = b.panel.paddingBottom
+        ViewCompat.setOnApplyWindowInsetsListener(b.panel) { v, insets ->
+            v.updatePadding(bottom = padBottom + insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom)
+            insets
+        }
         b.scrim.setOnClickListener { hide() }
         b.cancel.setOnClickListener { hide() }
     }

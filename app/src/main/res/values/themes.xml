@@ -44,15 +44,15 @@
     <style name="TextAppearance.Told.Body" parent="TextAppearance.Material3.BodyLarge">
         <item name="android:fontFamily">@font/eb_garamond</item>
         <item name="fontFamily">@font/eb_garamond</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/text</item>
     </style>
     <style name="TextAppearance.Told.Meta" parent="TextAppearance.Told.Body">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/text_muted</item>
     </style>
     <style name="TextAppearance.Told.Label" parent="TextAppearance.Told.Body">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:letterSpacing">0.15</item>
@@ -67,13 +67,13 @@
         <item name="android:minHeight">52dp</item>
         <item name="android:textAppearance">@style/TextAppearance.Told.Button</item>
         <item name="android:textColor">@color/on_olive</item>
-        <item name="backgroundTint">@color/olive</item>
+        <item name="backgroundTint">@color/button_primary</item>
         <item name="strokeColor">@color/primary_edge</item>
         <item name="strokeWidth">1dp</item>
     </style>
     <style name="Widget.Told.Button.Secondary">
         <item name="android:textColor">@color/text</item>
-        <item name="backgroundTint">@color/bg</item>
+        <item name="backgroundTint">@color/button_secondary</item>
         <item name="strokeColor">@color/quiet</item>
     </style>
     <style name="Widget.Told.Button.Text" parent="Widget.Material3.Button.TextButton">
@@ -113,7 +113,7 @@
     </style>
 
     <style name="Widget.Told.Fab" parent="Widget.Material3.FloatingActionButton.Primary">
-        <item name="backgroundTint">@color/olive</item>
+        <item name="backgroundTint">@color/button_primary</item>
         <item name="tint">@color/on_olive</item>
         <item name="shapeAppearanceOverlay">@style/Shape.Told.Round</item>
     </style>

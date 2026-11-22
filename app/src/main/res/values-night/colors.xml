@@ -4,6 +4,11 @@
     <color name="text">#F7F3EA</color>
     <color name="text_muted">#DCC9B1</color>
     <color name="quiet">#6E5F55</color>
-    <color name="error">#E8A48C</color>
+    <color name="error">#EBAE98</color>
     <color name="primary_edge">#DCC9B1</color>
+    <color name="olive_pressed">#66735A</color>
+    <color name="raised">#54443A</color>
+    <color name="raised_edge">#6E5F55</color>
+    <color name="chip_on">#DCC9B1</color>
+    <color name="chip_on_text">#3E2F26</color>
 </resources>

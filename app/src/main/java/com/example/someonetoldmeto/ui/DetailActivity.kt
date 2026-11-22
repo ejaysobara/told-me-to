@@ -29,7 +29,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         b = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(b.root)
-        b.root.padForSystemBars()
+        b.content.padForSystemBars()
         popOut = PopOut(this, b.content, b.popout)
 
         b.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }

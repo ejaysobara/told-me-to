@@ -41,3 +41,15 @@ Also checked: Share to Quick Add fills the Link field and closes after save; "Di
 | D06 | Success panel clipped on the right | Snackbar layout forces children to full width and ignores margins | Spacing moved to Snackbar padding | Panel edges even in screenshot |
 
 Found in code review and fixed (not seen on screen): AddEdit accepted `rec_id` from other apps (Share now uses an exported alias that ignores it, AddEdit is not exported); a rotation during the Share save window allowed a second save.
+
+## Improvements from test evidence (dark-mode design pass, 2026-11-23)
+
+| ID | Evidence | Change | Result |
+|---|---|---|---|
+| I01 | Dark screenshots: success panel was the same Earth as the screen and its shadow did not show, so the pop-in barely registered | Raised panels use #54443A with a 1dp #6E5F55 edge in dark mode | Panel and pop-out read as lifted cards in dark screenshots |
+| I02 | Held-press screenshots looked the same as rest in dark mode (shadow drop invisible, 97% scale too small) | Press now shifts the fill (Olive lighter in dark, darker in light; secondary fills) and scales to 95% | Held "Not for me" visibly fills and shrinks |
+| I03 | Selected type chip (Olive on Earth, about 2:1) looked weaker than the outlined chips next to it | Selected chip is Sand with Earth text in dark mode (8.0:1) | Selected chip is the most visible one |
+| I04 | Pop-out dim stopped at the status bar and the panel stopped above the navigation bar | Only the content is padded for system bars; the panel adds the navigation bar to its own bottom padding | Dim covers the full screen, panel reaches the bottom edge |
+| I05 | EB Garamond's short x-height made 14sp meta and 12sp labels look thin | Body 17sp, meta 15sp, labels 13sp | Meta lines readable at a glance |
+
+Also fixed: dark error color measured 4.46:1 on the raised panel, now #EBAE98 (4.9:1).

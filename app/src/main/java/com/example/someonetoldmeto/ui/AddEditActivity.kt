@@ -39,7 +39,7 @@ class AddEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         b = ActivityAddEditBinding.inflate(layoutInflater)
         setContentView(b.root)
-        b.root.padForSystemBars()
+        b.content.padForSystemBars()
 
         fromShare = intent.component?.className == "$packageName.ui.ShareActivity"
         editId = if (fromShare) null else intent.getLongExtra(Extras.REC_ID, -1).takeIf { it > 0 }
