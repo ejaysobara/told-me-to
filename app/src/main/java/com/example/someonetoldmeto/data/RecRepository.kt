@@ -29,7 +29,26 @@ class RecRepository(private val db: SQLiteDatabase) {
         }
     }
 
-    fun list(): List<Recommendation> = recs("$SELECT ORDER BY r.created_at DESC, r.rec_id DESC", null)
+    fun list(query: String = "", type: RecType? = null, status: RecStatus? = null, personId: Long? = null): List<Recommendation> {
+        val where = mutableListOf<String>()
+        val args = mutableListOf<String>()
+        if (query.isNotBlank()) {
+            where += "(r.title LIKE ? ESCAPE '\\' OR r.note LIKE ? ESCAPE '\\' OR p.name LIKE ? ESCAPE '\\')"
+            repeat(3) { args += "%" + Rules.escapeLike(query.trim()) + "%" }
+        }
+        type?.let { where += "r.type = ?"; args += it.db }
+        status?.let { where += "r.status = ?"; args += it.db }
+        personId?.let { where += "r.person_id = ?"; args += it.toString() }
+        val clause = if (where.isEmpty()) "" else " WHERE " + where.joinToString(" AND ")
+        return recs("$SELECT$clause ORDER BY r.created_at DESC, r.rec_id DESC", args.toTypedArray())
+    }
+
+    fun untriedIds(type: RecType?): List<Long> = db.rawQuery(
+        "SELECT rec_id FROM recommendation WHERE status = 'untried'" + if (type != null) " AND type = ?" else "",
+        type?.let { arrayOf(it.db) }
+    ).use { c -> buildList { while (c.moveToNext()) add(c.getLong(0)) } }
+
+    fun peopleScores(): List<PersonScore> = Rules.rankPeople(scores(null))
 
     fun get(id: Long): Recommendation? = recs("$SELECT WHERE r.rec_id = ?", arrayOf(id.toString())).firstOrNull()
 
@@ -39,12 +58,14 @@ class RecRepository(private val db: SQLiteDatabase) {
 
     fun delete(id: Long) = db.delete("recommendation", "rec_id = ?", arrayOf(id.toString())) > 0
 
-    fun score(personId: Long): PersonScore? = db.rawQuery(
+    fun score(personId: Long): PersonScore? = scores(personId).firstOrNull()
+
+    private fun scores(personId: Long?): List<PersonScore> = db.rawQuery(
         """SELECT p.person_id, p.name, COUNT(r.rec_id), SUM(r.status = 'liked'), SUM(r.status <> 'untried')
-           FROM person p JOIN recommendation r ON r.person_id = p.person_id
-           WHERE p.person_id = ? GROUP BY p.person_id""",
-        arrayOf(personId.toString())
-    ).use { c -> if (c.moveToFirst()) PersonScore(c.getLong(0), c.getString(1), c.getInt(2), c.getInt(3), c.getInt(4)) else null }
+           FROM person p JOIN recommendation r ON r.person_id = p.person_id""" +
+            (if (personId != null) " WHERE p.person_id = ?" else "") + " GROUP BY p.person_id",
+        personId?.let { arrayOf(it.toString()) }
+    ).use { c -> buildList { while (c.moveToNext()) add(PersonScore(c.getLong(0), c.getString(1), c.getInt(2), c.getInt(3), c.getInt(4))) } }
 
     fun personNames(prefix: String): List<String> = db.rawQuery(
         "SELECT name FROM person WHERE name LIKE ? ESCAPE '\\' ORDER BY name LIMIT 5",

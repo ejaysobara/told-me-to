@@ -11,7 +11,9 @@ import com.example.someonetoldmeto.R
 import com.example.someonetoldmeto.data.RecRepository
 import com.example.someonetoldmeto.databinding.ActivityDetailBinding
 import com.example.someonetoldmeto.model.RecStatus
+import com.example.someonetoldmeto.model.RecType
 import com.example.someonetoldmeto.model.Recommendation
+import com.example.someonetoldmeto.model.Rules
 
 class DetailActivity : AppCompatActivity() {
 
@@ -19,6 +21,9 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var popOut: PopOut
     private lateinit var rec: Recommendation
     private val repo by lazy { RecRepository.get(this) }
+    private val fromPick by lazy { intent.getBooleanExtra(Extras.FROM_PICK, false) }
+    private val pickType by lazy { intent.getStringExtra(Extras.TYPE)?.let(RecType::of) }
+    private var recId = -1L
 
     private val editLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         result.data?.getStringExtra(Extras.MESSAGE)?.let { showPanel(b.root, it) }
@@ -31,8 +36,12 @@ class DetailActivity : AppCompatActivity() {
         setContentView(b.root)
         b.content.padForSystemBars()
         popOut = PopOut(this, b.content, b.popout)
+        recId = savedInstanceState?.getLong(Extras.REC_ID) ?: intent.getLongExtra(Extras.REC_ID, -1)
 
         b.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        b.pickedLabel.isVisible = fromPick
+        b.pickAgain.isVisible = fromPick
+        b.pickAgain.setOnClickListener { pickAgain() }
         b.liked.setOnClickListener { rate(RecStatus.LIKED) }
         b.disliked.setOnClickListener { rate(RecStatus.DISLIKED) }
         b.edit.setOnClickListener {
@@ -47,6 +56,12 @@ class DetailActivity : AppCompatActivity() {
                 finishWith(getString(R.string.msg_deleted, rec.title))
             }
         }
+        if (fromPick && savedInstanceState == null) popInTitle()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putLong(Extras.REC_ID, recId)
     }
 
     override fun onResume() {
@@ -55,7 +70,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun load() {
-        rec = repo.get(intent.getLongExtra(Extras.REC_ID, -1)) ?: return finishWith(getString(R.string.msg_gone))
+        rec = repo.get(recId) ?: return finishWith(getString(R.string.msg_gone))
         val added = DateUtils.formatDateTime(this, rec.createdAt, DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_ABBREV_MONTH)
         b.title.text = rec.title
         b.meta.text = getString(R.string.detail_meta, getString(rec.type.label()), rec.person, added)
@@ -76,8 +91,13 @@ class DetailActivity : AppCompatActivity() {
         showPanel(b.root, getString(res, rec.person, score.liked, score.tried))
     }
 
-    private fun finishWith(message: String) {
-        setResult(RESULT_OK, Intent().putExtra(Extras.MESSAGE, message))
-        finish()
+    private fun pickAgain() {
+        val next = Rules.pick(repo.untriedIds(pickType), recId)?.takeIf { it != recId }
+            ?: return showPanel(b.root, getString(R.string.no_other_untried), error = true)
+        recId = next
+        load()
+        popInTitle()
     }
+
+    private fun popInTitle() = listOf(b.pickedLabel, b.title, b.meta).forEach { it.popIn() }
 }

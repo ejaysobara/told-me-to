@@ -55,4 +55,27 @@
     <string name="confirm_discard">Discard changes?</string>
     <string name="keep_editing">Keep editing</string>
     <string name="discard">Discard</string>
+
+    <string name="open_people">Open people</string>
+    <string name="search_hint">Search titles, notes, names</string>
+    <string name="filter_all_types">All types</string>
+    <string name="filter_any_status">Any status</string>
+    <string name="person_filter">From: %1$s</string>
+    <string name="clear_person">Clear person filter</string>
+    <string name="no_match_title">No picks match these filters.</string>
+    <string name="clear_filters">Clear filters</string>
+    <string name="pick_for_me">Pick for me</string>
+    <string name="pick_again">Pick again</string>
+    <string name="picked_for_you">Picked for you</string>
+    <string name="nothing_untried">You\'ve tried everything here. Add a new pick.</string>
+    <string name="no_other_untried">No other untried picks here.</string>
+    <string name="people_title">Whose picks you like</string>
+    <string name="people_empty_title">No people yet.</string>
+    <string name="people_empty_body">When you save a pick, the person who gave it shows up here.</string>
+    <string name="score">%1$d of %2$d liked</string>
+    <string name="nothing_tried">Nothing tried yet</string>
+    <plurals name="picks">
+        <item quantity="one">%d pick</item>
+        <item quantity="other">%d picks</item>
+    </plurals>
 </resources>

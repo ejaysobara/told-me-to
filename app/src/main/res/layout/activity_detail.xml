@@ -30,6 +30,15 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/pickedLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/picked_for_you"
+                    android:textAppearance="@style/TextAppearance.Told.Label"
+                    android:visibility="gone" />
+
+                <TextView
                     android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,6 +104,15 @@
                         android:layout_weight="1"
                         android:text="@string/status_disliked" />
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/pickAgain"
+                    style="@style/Widget.Told.Button.Secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/pick_again"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -160,10 +160,6 @@ class AddEditActivity : AppCompatActivity() {
         return problem == null
     }
 
-    private fun finishWith(message: String) {
-        setResult(RESULT_OK, Intent().putExtra(Extras.MESSAGE, message))
-        finish()
-    }
 
     private companion object {
         const val KEY_INITIAL = "initial"

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:minHeight="72dp"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="14dp">
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:textAppearance="@style/TextAppearance.Told.Body" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/score"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="@style/TextAppearance.Told.Title" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_marginTop="10dp"
+        android:importantForAccessibility="no"
+        android:max="100"
+        app:indicatorColor="@color/chip_on"
+        app:trackColor="@color/quiet"
+        app:trackCornerRadius="2dp"
+        app:trackThickness="4dp"
+        app:indicatorTrackGapSize="0dp"
+        app:trackStopIndicatorSize="0dp" />
+
+    <TextView
+        android:id="@+id/picks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bar"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.Told.Meta" />
+</RelativeLayout>

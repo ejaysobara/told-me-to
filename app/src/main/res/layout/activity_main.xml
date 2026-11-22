@@ -1,62 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        app:menu="@menu/main"
+        app:title="@string/app_name" />
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg"
+        app:liftOnScroll="false">
+
+        <LinearLayout
+            android:id="@+id/filters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@string/app_name" />
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/searchLayout"
+                style="@style/Widget.Told.Search"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                app:endIconMode="clear_text"
+                app:hintEnabled="false"
+                app:startIconDrawable="@drawable/ic_search">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/search_hint"
+                    android:imeOptions="actionSearch|flagNoExtractUi"
+                    android:inputType="text"
+                    android:textColorHint="@color/text_muted" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:clipToPadding="false"
-                android:layoutAnimation="@anim/rows_in"
-                android:paddingBottom="96dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                android:paddingHorizontal="16dp"
+                android:scrollbars="none">
 
-            <LinearLayout
-                android:id="@+id/empty"
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/types"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:checkedChip="@id/typeAll"
+                    app:selectionRequired="true"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/typeAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/filter_all_types" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/typeShow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/type_show" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/typeSong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/type_song" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/typePlace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/type_place" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/typeBook"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/type_book" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/typeOther"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/type_other" />
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingHorizontal="16dp"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/statuses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:checkedChip="@id/statusAll"
+                    app:selectionRequired="true"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/statusAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/filter_any_status" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/statusUntried"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/status_untried" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/statusLiked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/status_liked" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/statusDisliked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/status_disliked" />
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/personChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:checkable="false"
+                android:visibility="gone"
+                app:chipBackgroundColor="@color/quiet"
+                app:chipStrokeWidth="0dp"
+                app:closeIconTint="@color/text"
+                app:closeIconVisible="true" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:layoutAnimation="@anim/rows_in"
+            android:paddingBottom="104dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <LinearLayout
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="32dp"
+            android:paddingBottom="96dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/emptyTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:accessibilityHeading="true"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:padding="32dp"
-                android:visibility="gone">
+                android:text="@string/empty_title"
+                android:textAppearance="@style/TextAppearance.Told.Headline" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:accessibilityHeading="true"
-                    android:text="@string/empty_title"
-                    android:textAppearance="@style/TextAppearance.Told.Headline" />
+            <TextView
+                android:id="@+id/emptyBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/empty_body"
+                android:textAppearance="@style/TextAppearance.Told.Body"
+                android:textColor="@color/text_muted" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="@string/empty_body"
-                    android:textAppearance="@style/TextAppearance.Told.Body"
-                    android:textColor="@color/text_muted" />
-            </LinearLayout>
-        </FrameLayout>
-    </LinearLayout>
+            <Button
+                android:id="@+id/clearFilters"
+                style="@style/Widget.Told.Button.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/clear_filters"
+                android:visibility="gone" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/pick"
+        style="@style/Widget.Told.Button.Pick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        android:text="@string/pick_for_me" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add"
@@ -67,3 +235,4 @@
         android:contentDescription="@string/add_pick"
         app:srcCompat="@drawable/ic_add" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

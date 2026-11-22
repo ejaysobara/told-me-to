@@ -1,13 +1,13 @@
 # Test log
 
-Emulator: Medium_Phone_API_37.0 (API 37), headless, dark mode unless noted. Date: 2026-11-23. Branch: m3-screens.
+Emulator: Medium_Phone_API_37.0 (API 37), headless, dark mode unless noted. Date: 2026-11-23. Branches: m3-screens (T01-T07, T12), m4-extras (T08-T11).
 
 ## Automated
 
 | Suite | Command | Result |
 |---|---|---|
 | Unit (RulesTest) | `./gradlew testDebugUnitTest` | 15 of 15 passed |
-| Repository on emulator (RecRepositoryTest) | `./gradlew connectedDebugAndroidTest` | 7 of 7 passed |
+| Repository on emulator (RecRepositoryTest) | `./gradlew connectedDebugAndroidTest` | 12 of 12 passed (M4 added search, wildcard, combined filter, untried and people ranking tests) |
 | Lint | `./gradlew lintDebug` | 0 errors, 8 notes (min SDK attributes, Gradle version, merge tag, button bar style, overdraw on row ripple) |
 
 ## Planned cases
@@ -21,10 +21,10 @@ Emulator: Medium_Phone_API_37.0 (API 37), headless, dark mode unless noted. Date
 | T05 | Pass | "ana" linked to existing Ana; typing "an" suggests Ana as a chip |
 | T06 | Pass | Edited title to "Dune Messiah" and type to Book, "Changes saved." |
 | T07 | Pass | Delete, Cancel keeps it; Back closes only the panel; Delete removes it with "Deleted "Dune Messiah"." |
-| T08 | Partial | Rating shows "Marked as liked. Ana is now 1 of 1." People screen comes in M4 |
-| T09 | Not yet | Search and filter is M4 |
-| T10 | Not yet | Pick for me is M4 |
-| T11 | Partial | First launch empty state passes; filter and People empty states come in M4 |
+| T08 | Pass | Repository test rates Ana's picks liked, liked, not for me and gets 2 of 3. People screen shows "1 of 2 liked" for Ana's real data, best scores first, "Nothing tried yet" last |
+| T09 | Pass | "sev" shows Seven Nation Army and Severance; adding Song leaves only Seven Nation Army |
+| T10 | Pass | Place filter picks only untried places; Pick again switches to the other one; Book with one untried shows "No other untried picks here."; Show with none untried shows "You've tried everything here. Add a new pick." |
+| T11 | Pass | First launch hides search and filters and shows the empty message; Book + Liked shows "No picks match these filters." with Clear filters; People with no data shows "No people yet." |
 | T12 | Pass | Force stop and reopen, all picks still listed |
 
 Also checked: Share to Quick Add fills the Link field and closes after save; "Discard changes?" panel on Back with edits; light mode and 1.3x font size on List and Detail with no cut-off text.
@@ -39,6 +39,7 @@ Also checked: Share to Quick Add fills the Link field and closes after save; "Di
 | D04 | Message said "ana's pick" after saving as "ana" | Message used the typed name, not the stored one | Message reads the saved person name | Confirmed with "kuya jon" and "Mika" saves |
 | D05 | Saving from Share created two identical rows | Screen waits 1.2s before closing and the keyboard Enter fired save again; only the Save button was disabled | One `saved` guard in `save()` | "Cafe Test" saved once |
 | D06 | Success panel clipped on the right | Snackbar layout forces children to full width and ignores margins | Spacing moved to Snackbar padding | Panel edges even in screenshot |
+| D07 | Keyboard kept popping up on the List after using search, and once covered the "You've tried everything" panel | Search field kept focus, so Android reopened the keyboard each time the screen came back | `stateAlwaysHidden` on List; Search key and filter chips clear focus and hide the keyboard | Keyboard stays closed in all M4 captures; panel visible |
 
 Found in code review and fixed (not seen on screen): AddEdit accepted `rec_id` from other apps (Share now uses an exported alias that ignores it, AddEdit is not exported); a rotation during the Share save window allowed a second save.
 
@@ -65,3 +66,10 @@ Also fixed: dark error color measured 4.46:1 on the raised panel, now #EBAE98 (4
 | I10 | Long titles and links were cut off in single-line fields | Title and link wrap up to 3 lines | Full title visible while editing |
 | I11 | In landscape the keyboard covered the whole screen | flagNoExtractUi on all fields | Form stays visible above the keyboard |
 | I12 | At 2x font, "Discard" split as "Discar d" and rating buttons had uneven heights | Pop-out buttons share the row; paired buttons match height | Clean wrapping at 2x in both panels and Detail |
+
+## Improvements from the M4 design pass (2026-11-23)
+
+| ID | Evidence | Change | Result |
+|---|---|---|---|
+| I13 | At 2x font and in landscape the search and filters never collapsed, leaving room for about one row | Toolbar moved out of the collapsing header so the filters can scroll away; title stays pinned | At 2x, scrolling hides the filters and shows five rows |
+| I14 | First launch showed an empty search bar and filter chips with nothing to filter | Search, filters and Pick for me hide until there is at least one pick | First run shows only the empty message and + |

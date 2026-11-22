@@ -1,7 +1,6 @@
 package com.example.someonetoldmeto.ui
 
 import android.view.View
-import android.view.animation.OvershootInterpolator
 import androidx.activity.ComponentActivity
 import androidx.activity.addCallback
 import androidx.core.view.ViewCompat
@@ -40,14 +39,7 @@ class PopOut(activity: ComponentActivity, private val content: View, private val
         b.root.isVisible = true
         b.scrim.alpha = 0f
         b.scrim.animate().alpha(1f).setDuration(200).start()
-        b.panel.apply {
-            alpha = 0f
-            scaleX = 0.9f
-            scaleY = 0.9f
-            translationY = rise
-            animate().alpha(1f).scaleX(1f).scaleY(1f).translationY(0f).setDuration(200)
-                .setInterpolator(OvershootInterpolator(1.2f)).start()
-        }
+        b.panel.popIn()
         back.isEnabled = true
     }
 

@@ -73,6 +73,54 @@ class RecRepositoryTest {
         helper.writableDatabase.execSQL("DELETE FROM person WHERE name = 'Ana'")
     }
 
+    @Test fun searchMatchesTitleNoteAndNameIgnoringCase() {
+        repo.save(null, "Severance", "Ana", RecType.SHOW, null, null)
+        repo.save(null, "Blue", "Mika", RecType.SONG, "sevenfold remix", null)
+        repo.save(null, "Dune", "Seven", RecType.BOOK, null, null)
+        repo.save(null, "Ramen", "Jon", RecType.PLACE, null, null)
+        assertEquals(setOf("Severance", "Blue", "Dune"), repo.list("SEV").map { it.title }.toSet())
+    }
+
+    @Test fun searchTreatsWildcardsAsText() {
+        repo.save(null, "50% off ramen", "Jon", RecType.PLACE, null, null)
+        repo.save(null, "Severance", "Ana", RecType.SHOW, null, null)
+        assertEquals(listOf("50% off ramen"), repo.list("%").map { it.title })
+    }
+
+    @Test fun filtersCombine() {
+        val sev = repo.save(null, "Severance", "Ana", RecType.SHOW, null, null)
+        repo.save(null, "Seven Nation Army", "Ana", RecType.SONG, null, null)
+        repo.save(null, "Seventeen", "Jon", RecType.SONG, null, null)
+        val ana = repo.get(sev)!!.personId
+        assertEquals(listOf("Seven Nation Army"), repo.list("sev", RecType.SONG, null, ana).map { it.title })
+        repo.rate(sev, RecStatus.LIKED)
+        assertEquals(listOf("Severance"), repo.list(status = RecStatus.LIKED).map { it.title })
+    }
+
+    @Test fun untriedIdsRespectType() {
+        val a = repo.save(null, "Severance", "Ana", RecType.SHOW, null, null)
+        val b = repo.save(null, "Dark", "Ana", RecType.SHOW, null, null)
+        repo.save(null, "Blue", "Mika", RecType.SONG, null, null)
+        repo.rate(b, RecStatus.LIKED)
+        assertEquals(listOf(a), repo.untriedIds(RecType.SHOW))
+        assertEquals(2, repo.untriedIds(null).size)
+    }
+
+    @Test fun peopleRankedBestFirstAndHiddenWithoutPicks() {
+        val a1 = repo.save(null, "A1", "Ana", RecType.OTHER, null, null)
+        val a2 = repo.save(null, "A2", "Ana", RecType.OTHER, null, null)
+        val j1 = repo.save(null, "J1", "Jon", RecType.OTHER, null, null)
+        val m1 = repo.save(null, "M1", "Mika", RecType.OTHER, null, null)
+        repo.save(null, "M2", "Mika", RecType.OTHER, null, null)
+        repo.rate(a1, RecStatus.LIKED)
+        repo.rate(a2, RecStatus.DISLIKED)
+        repo.rate(j1, RecStatus.LIKED)
+        repo.delete(m1)
+        val gone = repo.save(null, "Z", "Zed", RecType.OTHER, null, null)
+        repo.delete(gone)
+        assertEquals(listOf("Jon", "Ana", "Mika"), repo.peopleScores().map { it.name })
+    }
+
     @Test fun suggestionsMatchPrefixAndEscapeWildcards() {
         repo.save(null, "A", "Ana", RecType.OTHER, null, null)
         repo.save(null, "B", "Andrei", RecType.OTHER, null, null)

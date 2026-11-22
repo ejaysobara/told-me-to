@@ -13,6 +13,7 @@
     <color name="error">#9A3B26</color>
     <color name="primary_edge">#00000000</color>
     <color name="olive_pressed">#48533F</color>
+    <color name="terracotta_pressed">#A8553A</color>
     <color name="raised">#F7F3EA</color>
     <color name="raised_edge">#DCC9B1</color>
     <color name="chip_on">#55624A</color>
