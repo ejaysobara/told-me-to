@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Someone Told Me To</string>
+    <string name="app_label">Told Me To</string>
+    <string name="add_pick">Add a pick</string>
+    <string name="back">Back</string>
+    <string name="save">Save</string>
+    <string name="new_pick">New pick</string>
+    <string name="edit_pick">Edit pick</string>
+    <string name="what_is_it">What is it? *</string>
+    <string name="who_told_you">Who told you? *</string>
+    <string name="type_optional">Type (optional)</string>
+    <string name="note_optional">Note (optional)</string>
+    <string name="link_optional">Link (optional)</string>
+    <string name="use_name">Use %1$s</string>
+
+    <string name="type_show">Show</string>
+    <string name="type_song">Song</string>
+    <string name="type_place">Place</string>
+    <string name="type_book">Book</string>
+    <string name="type_other">Other</string>
+
+    <string name="status_untried">Untried</string>
+    <string name="status_liked">Liked it</string>
+    <string name="status_disliked">Not for me</string>
+
+    <string name="row_meta">from %1$s · %2$s</string>
+    <string name="detail_meta">%1$s · from %2$s · added %3$s</string>
+    <string name="note_quoted">“%1$s”</string>
+    <string name="tried_it">Tried it?</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="empty_title">Nothing saved yet.</string>
+    <string name="empty_body">When someone tells you to watch, hear, read, or visit something, tap + to save it.</string>
+
+    <string name="err_title_empty">Add a title.</string>
+    <string name="err_title_long">Keep it to 100 characters or less.</string>
+    <string name="err_person_empty">Add who told you.</string>
+    <string name="err_person_long">Keep the name to 40 characters or less.</string>
+    <string name="err_note_long">Keep the note to 500 characters or less.</string>
+    <string name="err_link_long">Keep the link to 500 characters or less.</string>
+    <string name="err_save">Couldn\'t save. Try again.</string>
+
+    <string name="msg_saved">Saved. %1$s\'s pick is on your list.</string>
+    <string name="msg_changes_saved">Changes saved.</string>
+    <string name="msg_deleted">Deleted “%1$s”.</string>
+    <string name="msg_gone">This pick was deleted.</string>
+    <string name="msg_rated_liked">Marked as liked. %1$s is now %2$d of %3$d.</string>
+    <string name="msg_rated_disliked">Marked as not for me. %1$s is now %2$d of %3$d.</string>
+
+    <string name="confirm_delete">Delete “%1$s”?</string>
+    <string name="confirm_delete_body">This can\'t be undone.</string>
+    <string name="confirm_discard">Discard changes?</string>
+    <string name="keep_editing">Keep editing</string>
+    <string name="discard">Discard</string>
+</resources>

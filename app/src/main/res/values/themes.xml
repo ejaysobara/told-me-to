@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Told" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/olive</item>
+        <item name="colorOnPrimary">@color/on_olive</item>
+        <item name="colorSecondaryContainer">@color/quiet</item>
+        <item name="colorOnSecondaryContainer">@color/text</item>
+        <item name="colorTertiary">@color/terracotta</item>
+        <item name="colorOnTertiary">@color/white</item>
+        <item name="android:colorBackground">@color/bg</item>
+        <item name="colorSurface">@color/bg</item>
+        <item name="colorOnSurface">@color/text</item>
+        <item name="colorOnSurfaceVariant">@color/text_muted</item>
+        <item name="colorOutline">@color/text_muted</item>
+        <item name="colorError">@color/error</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="fontFamily">serif</item>
+        <item name="materialButtonStyle">@style/Widget.Told.Button</item>
+        <item name="chipStyle">@style/Widget.Told.Chip</item>
+        <item name="textInputStyle">@style/Widget.Told.TextField</item>
+        <item name="toolbarStyle">@style/Widget.Told.Toolbar</item>
+        <item name="floatingActionButtonStyle">@style/Widget.Told.Fab</item>
+    </style>
+
+    <style name="TextAppearance.Told.Display" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="android:fontFamily">serif</item>
+        <item name="fontFamily">serif</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
+    <style name="TextAppearance.Told.Headline" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">serif</item>
+        <item name="fontFamily">serif</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
+    <style name="TextAppearance.Told.Title" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">serif</item>
+        <item name="fontFamily">serif</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
+    <style name="TextAppearance.Told.Body" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:fontFamily">serif</item>
+        <item name="fontFamily">serif</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
+    <style name="TextAppearance.Told.Meta" parent="TextAppearance.Told.Body">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_muted</item>
+    </style>
+    <style name="TextAppearance.Told.Label" parent="TextAppearance.Told.Body">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.15</item>
+        <item name="android:textColor">@color/text_muted</item>
+    </style>
+    <style name="TextAppearance.Told.Button" parent="TextAppearance.Told.Body">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.Told.Button" parent="Widget.Material3.Button">
+        <item name="android:stateListAnimator">@animator/press</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Told.Button</item>
+        <item name="android:textColor">@color/on_olive</item>
+        <item name="backgroundTint">@color/olive</item>
+        <item name="strokeColor">@color/primary_edge</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+    <style name="Widget.Told.Button.Secondary">
+        <item name="android:textColor">@color/text</item>
+        <item name="backgroundTint">@color/bg</item>
+        <item name="strokeColor">@color/quiet</item>
+    </style>
+    <style name="Widget.Told.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Told.Button</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
+
+    <style name="Widget.Told.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textAppearance">@style/TextAppearance.Told.Body</item>
+        <item name="android:textColor">@color/chip_text</item>
+        <item name="chipBackgroundColor">@color/chip_bg</item>
+        <item name="chipStrokeColor">@color/chip_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">20dp</item>
+        <item name="chipMinHeight">40dp</item>
+        <item name="checkedIconVisible">false</item>
+    </style>
+
+    <style name="Widget.Told.TextField" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/quiet</item>
+        <item name="boxStrokeColor">@color/text</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="android:textColorHint">@color/text</item>
+        <item name="hintTextColor">@color/text</item>
+    </style>
+
+    <style name="Widget.Told.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextAppearance">@style/TextAppearance.Told.Headline</item>
+        <item name="navigationIconTint">@color/text</item>
+    </style>
+
+    <style name="Widget.Told.Fab" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">@color/olive</item>
+        <item name="tint">@color/on_olive</item>
+        <item name="shapeAppearanceOverlay">@style/Shape.Told.Round</item>
+    </style>
+    <style name="Shape.Told.Round" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

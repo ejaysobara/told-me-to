@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="olive">#55624A</color>
+    <color name="terracotta">#C06746</color>
+    <color name="white">#FFFFFF</color>
+    <color name="on_olive">#F7F3EA</color>
+    <color name="scrim">#66000000</color>
+    <color name="bg">#F7F3EA</color>
+    <color name="text">#3E2F26</color>
+    <color name="text_muted">#6E5F55</color>
+    <color name="quiet">#DCC9B1</color>
+    <color name="error">#9A3B26</color>
+    <color name="primary_edge">#00000000</color>
+</resources>

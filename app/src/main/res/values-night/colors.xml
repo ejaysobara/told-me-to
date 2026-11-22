@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#3E2F26</color>
+    <color name="text">#F7F3EA</color>
+    <color name="text_muted">#DCC9B1</color>
+    <color name="quiet">#6E5F55</color>
+    <color name="error">#E8A48C</color>
+    <color name="primary_edge">#DCC9B1</color>
+</resources>
