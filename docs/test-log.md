@@ -73,6 +73,7 @@ Also fixed: dark error color measured 4.46:1 on the raised panel, now #EBAE98 (4
 |---|---|---|---|
 | I13 | At 2x font and in landscape the search and filters never collapsed, leaving room for about one row | Toolbar moved out of the collapsing header so the filters can scroll away; title stays pinned | At 2x, scrolling hides the filters and shows five rows |
 | I14 | First launch showed an empty search bar and filter chips with nothing to filter | Search, filters and Pick for me hide until there is at least one pick | First run shows only the empty message and + |
+| I15 | Release APK was 6.4 MB because code shrinking was off | R8 code and resource shrinking on for release builds | 2.3 MB; 15 unit and 12 database tests pass; every flow re-run on the shrunk APK with no crashes |
 
 ## M5 review (2026-11-23)
 
