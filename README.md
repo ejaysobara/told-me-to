@@ -10,9 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="../../releases/latest"><b>Download the APK (v1.0)</b></a> ·
-  <a href="docs/Someone_Told_Me_To_Documentation.pdf">Documentation</a> ·
-  <a href="DESIGN.md">Design notes</a>
+  <a href="../../releases/latest"><b>Download the APK (v1.0)</b></a>
 </p>
 
 ---
@@ -68,6 +66,6 @@ Kotlin, XML layouts with Material Components 3, and plain `SQLiteOpenHelper`. Fo
 | `app/src/main/java/.../ui` | The four screens and shared pieces (success panel, pop-out confirm panel, smooth scrolling) |
 | `app/src/main/java/.../data` | Database setup and every query |
 | `app/src/main/java/.../model` | What a pick is, input rules, Pick for me, trust ranking |
-| `docs/` | Proposal, documentation, test log, user guide screenshots |
+| `docs/` | Test log and the images in this README |
 
 Built as the final project for CS0011 Mobile Programming. Version 1.0 passes all 12 planned test cases; 7 defects found during testing were fixed and are recorded in [docs/test-log.md](docs/test-log.md).

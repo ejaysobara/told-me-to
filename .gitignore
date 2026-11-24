@@ -7,3 +7,9 @@ local.properties
 captures/
 graphify-out/
 dist/
+DESIGN.md
+PRODUCT.md
+floorplan/
+docs/*
+!docs/media/
+!docs/test-log.md
